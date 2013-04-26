@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 
 import tenx.store.model.Product;
 
+@Component
 public class InMemoryProductDao implements ProductDao {
 
 	Map<Long, Product> products = new HashMap<Long, Product>(); 
