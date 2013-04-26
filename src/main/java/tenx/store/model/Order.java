@@ -25,4 +25,8 @@ public class Order {
 		return items;
 	}
 
+	public void addItem(LineItem item) {
+		items.add(item);
+	}
+
 }
