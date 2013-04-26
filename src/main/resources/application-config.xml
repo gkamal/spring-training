@@ -10,8 +10,8 @@
 	<!--<bean id="orderService" class="tenx.store.internal.SimpleOrderService">
 		<constructor-arg ref="productDao"/> 
 		 <property name="productDao" ref="productDao"/> 
-	</bean>
+	</bean>-->
 
-	<bean id="productDao" class="tenx.store.internal.InMemoryProductDao"/>-->
+	<bean id="productDao" class="tenx.store.internal.InMemoryProductDao" lazy-init="true"/>
 
 </beans>

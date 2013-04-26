@@ -3,22 +3,37 @@ package tenx.store.internal;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import tenx.store.OrderService;
 import tenx.store.model.LineItem;
 import tenx.store.model.Order;
 import tenx.store.model.Product;
 
-@Component
+//@Service
+//@Component
+//@Scope("prototype")
 public class SimpleOrderService implements OrderService {
 	private ProductDao productDao;
 	
-	@Autowired
+	//@Autowired
 	public SimpleOrderService(/*@Qualifier("jdbcProductDao")*/ ProductDao productDao) {
 		super();
 		this.productDao = productDao;
 	}
+	
+	@PostConstruct
+	public void init() {
+		
+	}
+	
+	@Predestroy
+	public void destroy() {
+		
+	}
+	
 
 	public BigDecimal calculateCost(Order order) {
 		BigDecimal cost = new BigDecimal("0");
