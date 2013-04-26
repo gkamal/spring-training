@@ -1,6 +1,6 @@
 package tenx.store.internal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
@@ -8,19 +8,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tenx.store.OrderService;
-import tenx.store.config.ApplicaitonConfig;
 import tenx.store.model.LineItem;
 import tenx.store.model.Order;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration("classpath:application-config.xml")
-@ContextConfiguration(classes=ApplicaitonConfig.class)
+@ContextConfiguration({"classpath:application-config.xml", "classpath:test-infra-config.xml"})
+//@ContextConfiguration(classes=ApplicaitonConfig.class)
 public class SimpleOrderServiceIntegrationTest {
 
 	@Autowired
@@ -41,8 +38,7 @@ public class SimpleOrderServiceIntegrationTest {
 		item.setQuantity(5);
 		o.addItem(item);
 		
-		//assertEquals(new BigDecimal(1995), orderService.calculateCost(o));
-
+		assertEquals(2000d, orderService.calculateCost(o).doubleValue(),0.001);
 	}
 
 }

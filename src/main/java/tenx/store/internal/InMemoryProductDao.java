@@ -13,7 +13,7 @@ import tenx.store.model.Product;
 
 //@Repository
 //@Component
-@Lazy
+//@Lazy
 public class InMemoryProductDao implements ProductDao {
 
 	Map<Long, Product> products = new HashMap<Long, Product>(); 

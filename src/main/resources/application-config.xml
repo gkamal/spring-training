@@ -2,16 +2,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<aop:aspectj-autoproxy>
+		<aop:include name="loggingAspect"/>
+	</aop:aspectj-autoproxy>
+
 	<context:component-scan base-package="tenx.store"/>
+	<context:property-placeholder location="config.properties"/>
 	
-	<!--<bean id="orderService" class="tenx.store.internal.SimpleOrderService">
+	<bean id="loggingAspect" class="tenx.store.infra.LoggingAspect"/>
+	
+	
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="config.${ENV}.properties"/>
+	</bean> -->
+	
+<!-- 	<bean id="orderService" class="tenx.store.internal.SimpleOrderService">
 		<constructor-arg ref="productDao"/> 
 		 <property name="productDao" ref="productDao"/> 
-	</bean>-->
+		 <property name="maxQuantity" value="${orderService.maxQuanity}"/>
+	</bean>
 
-	<bean id="productDao" class="tenx.store.internal.InMemoryProductDao" lazy-init="true"/>
+	<bean id="productDao" class="tenx.store.internal.InMemoryProductDao" lazy-init="true"/> -->
 
 </beans>

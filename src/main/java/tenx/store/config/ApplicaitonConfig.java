@@ -8,7 +8,7 @@ import tenx.store.internal.InMemoryProductDao;
 import tenx.store.internal.ProductDao;
 import tenx.store.internal.SimpleOrderService;
 
-@Configuration
+//@Configuration
 public class ApplicaitonConfig {
 
 //	@Bean
