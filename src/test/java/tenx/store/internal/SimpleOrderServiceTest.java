@@ -27,7 +27,7 @@ public class SimpleOrderServiceTest {
 				return p;
 			}
 		};
-		orderService = new SimpleOrderService(productDao);
+		orderService = new SimpleOrderService(productDao,null);
 		orderService = (OrderService) LoggingWrapper.wrap(orderService);
 		//orderService.setProductDao(productDao);
 	}

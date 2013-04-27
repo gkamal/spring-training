@@ -19,7 +19,7 @@ public class ApplicaitonConfig {
 
 	@Bean
 	public OrderService orderService() {
-		SimpleOrderService orderService = new SimpleOrderService(productDao());
+		SimpleOrderService orderService = new SimpleOrderService(productDao(), null);
 		return orderService;
 	}
 	

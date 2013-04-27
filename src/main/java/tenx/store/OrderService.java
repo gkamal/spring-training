@@ -10,4 +10,6 @@ public interface OrderService {
 	
 	Long processOrder(Order order);
 
+	void createAudit(String string);
+
 }

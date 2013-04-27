@@ -16,6 +16,7 @@ public class LoggingAspect implements Ordered {
 
 	@Around("execution(@tenx.store.infra.Profile * *(..))")
 	public Object profile(ProceedingJoinPoint pjp) throws Throwable {
+		System.out.println("around - start");
 		StopWatch watch = new StopWatch(pjp.getSignature().getName());
 		try {
 			watch.start();
@@ -27,15 +28,16 @@ public class LoggingAspect implements Ordered {
 	}
 	
 	//@Before("execution(* tenx.store.internal.*.*(..))")
+	//@After("execution(* tenx.store.internal.*.*(..))")
 	public void logBefore(JoinPoint joinPoint) {
-		System.out.println(joinPoint.getSignature().getName()
+		System.out.println("Before"  + joinPoint.getSignature().getName()
 				+ " " + joinPoint.getTarget() 
 				+ joinPoint.getArgs());
 	}
 	
-	//@After("execution(* tenx.store.internal.*.*(..))")
+	@After("execution(* tenx.store.internal.*.*(..))")
 	public void logAfter(JoinPoint joinPoint) {
-		System.out.println(joinPoint.getSignature().getName()
+		System.out.println("After " + joinPoint.getSignature().getName()
 				+ " " + joinPoint.getTarget() 
 				+ joinPoint.getArgs());
 	}
