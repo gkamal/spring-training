@@ -5,17 +5,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import tenx.store.model.Product;
 
-@Repository
+//@Repository
 public class JDBCProductDao implements ProductDao {
 
 	private final class ProductRowmapper implements RowMapper<Product> {
@@ -35,7 +38,7 @@ public class JDBCProductDao implements ProductDao {
 	JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public JDBCProductDao(DataSource dataSource) {
+	public JDBCProductDao(/*@Qualifier("inventoryDs")*/ DataSource dataSource) {
 		super();
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -48,14 +51,22 @@ public class JDBCProductDao implements ProductDao {
 	}	
 		
 	@Override
-	public void update(Product product) {
+	public Product update(Product product) {
 		//jdbcTemplate.queryForInt(sql)
 		jdbcTemplate.update("update products set name=?, price=?, available_quantity=? where id = ?",
 				product.getName(),
 				product.getPrice(),
 				product.getAvailableQuantity(),
 				product.getId());
+		return product;
 	}
+
+	@Override
+	public List<Product> search(String name) {
+		return new ArrayList<Product>();
+	}
+	
+	
 
 }
 

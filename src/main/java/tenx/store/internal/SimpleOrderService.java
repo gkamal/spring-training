@@ -56,18 +56,10 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
 
 	@Profile
 	public BigDecimal calculateCost(Order order) {
-		
-		BigDecimal cost = new BigDecimal("0");
-		for(LineItem lineItem:order.getItems()) {
-			Product p = productDao.findById(lineItem.getProductId());
-			cost = cost.add(p.getPrice().multiply(new BigDecimal(lineItem.getQuantity())));
-		}
-		return cost;
-		
-		
+		return order.getCost();
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<Long> bulkOrder(List<Order> orders) {
 
 		for(Order o:orders) {
@@ -92,12 +84,12 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
 		
 //		try {
 		for(LineItem lineItem:order.getItems()) {
-			Product p = productDao.findById(lineItem.getProductId());
+			Product p = lineItem.getProduct();
 			if (p.getAvailableQuantity() < lineItem.getQuantity()) {
 				throw new RuntimeException("Insufficient quantity");
 			}
 			p.setAvailableQuantity(p.getAvailableQuantity() - lineItem.getQuantity());
-			productDao.update(p);
+//			productDao.update(p);
 		}
 //		} catch(RuntimeException e) {
 //			//
@@ -110,6 +102,13 @@ public class SimpleOrderService implements OrderService, ApplicationContextAware
 		// catch()
 		//  conn.rollback
 	}
+	
+//	@Transactional
+//	Order findOrder(Long orderId) {
+//		// from Order o join fetch o.lineItems
+//		
+//		return order;
+//	}
 
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)

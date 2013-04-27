@@ -1,7 +1,9 @@
 package tenx.store.internal;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.annotation.Lazy;
@@ -32,8 +34,20 @@ public class InMemoryProductDao implements ProductDao {
 		return products.get(id);
 	}
 
-	public void update(Product product) {
+	public Product update(Product product) {
 		products.put(product.getId(), product);
+		return product;
 	}
+
+
+	@Override
+	public List<Product> search(String name) {
+		// TODO Auto-generated method stub
+		return new ArrayList<Product>();
+	}
+	
+	
+	
+	
 
 }

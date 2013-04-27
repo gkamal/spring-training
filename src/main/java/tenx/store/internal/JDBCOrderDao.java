@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import tenx.store.model.Order;
 
-@Repository
+//@Repository
 public class JDBCOrderDao implements OrderDao {
 
 	@Override

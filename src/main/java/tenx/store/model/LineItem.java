@@ -1,8 +1,23 @@
 package tenx.store.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="lineItems")
 public class LineItem {
+	@Id
+	@GeneratedValue
 	private Long id;
-	private Long productId;
+	
+	@ManyToOne
+	@JoinColumn(name="product_id")
+	private Product product;
+	
 	private int quantity;
 
 	public Long getId() {
@@ -13,12 +28,12 @@ public class LineItem {
 		this.id = id;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getQuantity() {

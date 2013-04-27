@@ -1,8 +1,11 @@
 package tenx.store.internal;
 
+import java.util.List;
+
 import tenx.store.model.Product;
 
 public interface ProductDao {
+	List<Product> search(String name);
 	Product findById(Long id);
-	void update(Product product);
+	Product update(Product product);
 }
