@@ -1,4 +1,4 @@
-package tenx.store.model;
+package fk.training.spring.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,4 +25,7 @@ public class Order {
 		return items;
 	}
 
+    public void addItem(LineItem lineItem) {
+        items.add(lineItem);
+    }
 }

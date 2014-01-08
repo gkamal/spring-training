@@ -1,4 +1,4 @@
-package tenx.store.model;
+package fk.training.spring.model;
 
 public class LineItem {
 	private Long id;
