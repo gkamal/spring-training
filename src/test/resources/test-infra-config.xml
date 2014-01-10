@@ -3,10 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="url" value="jdbc:hsqldb:mem:store"/>
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <property name="url" value="jdbc:hsqldb:mem:testdb"/>
         <property name="username" value="SA"/>
         <property name="password" value=""/>
+    </bean>-->
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean">
+        <property name="databaseName" value="hsql"/>
+        <property name="databasePopulator" ref="databasePopulator"/>
+    </bean>
+
+    <bean id="databasePopulator" class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+        <property name="scripts">
+            <list>
+                <value>classpath:testdb/schema.sql</value>
+                <value>classpath:testdb/init-data.sql</value>
+            </list>
+        </property>
     </bean>
 
 </beans>

@@ -1,5 +1,9 @@
-package fk.training.spring.model;
+package fk.training.spring.internal;
 
+import fk.training.spring.OrderService;
+import fk.training.spring.model.LineItem;
+import fk.training.spring.model.Order;
+import fk.training.spring.model.Product;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +29,12 @@ public class OrderSerivceImplTest {
                 product.setPrice(new BigDecimal("100"));
                 return product;
             }
-        });
+
+            @Override
+            public void update(Product p) {
+
+            }
+        }, null);
 
         Order order = new Order();
         LineItem lineItem = new LineItem();

@@ -1,4 +1,6 @@
-package fk.training.spring.model;
+package fk.training.spring;
+
+import fk.training.spring.model.Order;
 
 import java.math.BigDecimal;
 
