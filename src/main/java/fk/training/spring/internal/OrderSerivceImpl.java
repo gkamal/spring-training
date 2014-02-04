@@ -3,21 +3,27 @@ package fk.training.spring.internal;
 import fk.training.spring.OrderService;
 import fk.training.spring.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-@Service
+@Service("orderServiceTarget")
 public class OrderSerivceImpl implements OrderService {
 
     private final ProductRepository productRepostiory;
     private final OrderRepository orderRepository;
+    private final DataSource dataSource;
 
     @Autowired
-    public OrderSerivceImpl(ProductRepository productRepostiory, OrderRepository orderRepository) {
+    public OrderSerivceImpl(ProductRepository productRepostiory, OrderRepository orderRepository, DataSource dataSource) {
         this.productRepostiory = productRepostiory;
         this.orderRepository = orderRepository;
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -31,7 +37,7 @@ public class OrderSerivceImpl implements OrderService {
     }
 
     @Override
-    public void processOrder(Order order) {
+    public void processOrder(Order order) throws Exception {
         for(LineItem lineItem:order.getItems()) {
             Product p = productRepostiory.findById(lineItem.getProductId());
             if (p.getAvailableQuantity() < lineItem.getQuantity()) {

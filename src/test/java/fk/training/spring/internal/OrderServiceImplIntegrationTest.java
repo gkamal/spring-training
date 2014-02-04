@@ -8,12 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -25,7 +27,9 @@ import static org.junit.Assert.fail;
 public class OrderServiceImplIntegrationTest {
 
     @Autowired
+    @Qualifier("orderService")
     private OrderService orderService;
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -43,7 +47,7 @@ public class OrderServiceImplIntegrationTest {
 
 
     @Test
-    public void testCreateOrder() {
+    public void testCreateOrder() throws Exception {
         Order o = new Order();
         LineItem item = new LineItem();
         item.setProductId(1l);

@@ -25,7 +25,7 @@ public class JdbcOrderRepository extends JdbcBaseRepository implements OrderRepo
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = dataSource.getConnection();
+            connection = DatasourceUtil.getConnection();
             ps = connection.prepareStatement("insert into orders (id,cost) " +
                     "values(?,?)");
             ps.setLong(1, order.getId());
@@ -45,7 +45,6 @@ public class JdbcOrderRepository extends JdbcBaseRepository implements OrderRepo
         } finally {
             closeSilently(rs);
             closeSilently(ps);
-            closeSilently(connection);
         }
     }
 }
